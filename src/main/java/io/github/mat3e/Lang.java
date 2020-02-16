@@ -5,6 +5,7 @@ class Lang {
     private String welcomeMsg;
     private String code;
 
+
     public Lang(Long id, String welcomeMsg, String code) {
         this.id = id;
         this.welcomeMsg = welcomeMsg;
@@ -30,5 +31,4 @@ class Lang {
     public void setCode(String code) {
         this.code = code;
     }
-
 }
