@@ -14,8 +14,9 @@ import java.util.Optional;
 public class HelloServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(HelloServlet.class);
     private static final String NAME_PARAM = "name";
+    private final String LANG_PARAM = "lang";
 
-    private HelloService helloService;
+    private HelloService service;
 
     /**
      * Server container needs it.
@@ -23,16 +24,19 @@ public class HelloServlet extends HttpServlet {
     @SuppressWarnings("unused")
     public HelloServlet()
     {
-        helloService = new HelloService();
+        service = new HelloService();
     }
 
     HelloServlet(HelloService service)
     {
-        helloService = service;
+        service = service;
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("Request with params :" + req.getParameterMap());
-        resp.getWriter().write(helloService.prepareGreeting(req.getParameter(NAME_PARAM)));
+        var lang = req.getParameter(LANG_PARAM);
+        var name =req.getParameter(NAME_PARAM);
+
+        resp.getWriter().write(service.prepareGreeting(name, lang));
     }
 }
